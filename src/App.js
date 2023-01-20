@@ -1,24 +1,32 @@
-import logo from './logo.svg';
+import { useEffect, useState } from 'react';
 import './App.css';
 
+function Clock() {
+  const [time, setTime] = useState(new Date());
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      console.log("running...");
+      setTime(new Date());
+    }, 1000);
+
+    return () => {
+      console.log("cleanup");
+      clearInterval(intervalId);
+    }
+  }, []);
+
+  return <div>{time.toString()}</div>
+}
+
 function App() {
+  const[showClock, setShowClock] = useState(true);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    {showClock ? <Clock /> : null}
+    <button onClick={() => setShowClock(false)}>Hide Clock</button>
+    </>
   );
 }
 
