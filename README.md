@@ -1,70 +1,42 @@
-# Getting Started with Create React App
+# React fundamentals - Side Effects
+The general purpose ("main effect") of a React Component function is to return some JSX so as React knows what to render.
+We might also want to do some **side effects** as a result of rendering a component.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Side Effects
+Side effects might be useful for things like:
 
-## Available Scripts
+- Making a request to an API for data from a backend server.
+- Interacting with the browser API (`document` and `window`).
+- Using unpredictable timing functions like `setTimeout` and `setInterval`.
+- Setting up a subscription.
 
-In the project directory, you can run:
+Side effects are not predictable because they are actions that are performed with the "outside world". We perform side effects when we need to reach outside of our React Components to do something. This will not give us predictable results.
 
-### `npm start`
+This is why **useEffect** exists - if we perform a side effect directly in our component body, it'll probably get in the way of our React components rendering.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## useEffect
+In order to use side effects in our components, we use the **useEffect** Hook. To use this hook, we need to call `useEffect()` in our components.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+The **Effect** hook allows you to perform side effects in function components.
 
-### `npm test`
+### Basic Syntax
+The basic syntax for useEffect is as follows: 
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+        function MyComponent() {
+            // 1. Call it above the returned JSX
+            // 2. Pass 2 arguments to it: a function and an array
 
-### `npm run build`
+            useEffect(() => {}, []);
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+            ...
+        }
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+The function passed to `useEffect` is a callback function. After our component has been rendered, that's when the callback function in the `useEffect` function will run. We can perform our side effect(s).
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+The second argument is an array, called the *dependencies array*. We use this array to control when `useEffect` will run.
 
-### `npm run eject`
+## Important things to note
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Author
+[Samuel Gitimu](https://github.com/Samueelx)
